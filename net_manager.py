@@ -4,7 +4,7 @@ from cnn import CNN
 class NetManager():
     def __init__(self, num_input, num_classes, learning_rate, mnist,
                  max_step_per_action=5500*3,
-                 bathc_size=100,
+                 batch_size=100,
                  dropout_rate=0.85):
 
         self.num_input = num_input
@@ -13,7 +13,7 @@ class NetManager():
         self.mnist = mnist
 
         self.max_step_per_action = max_step_per_action
-        self.bathc_size = bathc_size
+        self.batch_size = batch_size
         self.dropout_rate = dropout_rate
 
     def get_reward(self, action, step, pre_acc):
@@ -31,7 +31,7 @@ class NetManager():
                     train_sess.run(init)
 
                     for step in range(self.max_step_per_action):
-                        batch_x, batch_y = self.mnist.train.next_batch(self.bathc_size)
+                        batch_x, batch_y = self.mnist.train.next_batch(self.batch_size)
                         feed = {model.X: batch_x,
                                 model.Y: batch_y,
                                 model.dropout_keep_prob: self.dropout_rate,

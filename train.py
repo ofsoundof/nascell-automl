@@ -60,7 +60,7 @@ def train(mnist):
                              num_classes=10,
                              learning_rate=0.001,
                              mnist=mnist,
-                             bathc_size=100)
+                             batch_size=100)
 
     MAX_EPISODES = 2500
     step = 0
@@ -70,6 +70,7 @@ def train(mnist):
     for i_episode in range(MAX_EPISODES):       
         action = reinforce.get_action(state)
         print("ca:", action)
+        print("action shape", action.shape)
         if all(ai > 0 for ai in action[0][0]):
             reward, pre_acc = net_manager.get_reward(action, step, pre_acc)
             print("=====>", reward, pre_acc)
